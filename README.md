@@ -8,7 +8,7 @@ Using the quick firing terror tank you must penetrate the city of the Berks and 
 
 The Berks are after you, the Drones are after you, even the protective blocks will destroy you on impact. You are given 5 lives, you can gain extra lives up to a maximum of 9, by recovering the hearts scattered around the City.
 
-##TODO
+## TODO
 
 1. There seems to be a bug in the wall collision in some of the rooms. Room 22 is definitely wrong. Update the points that define the walls.
 2. Provide an alternative method for control on OSX, definable keyboard control ideally.

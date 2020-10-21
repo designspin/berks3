@@ -235,6 +235,15 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     }
     
     func initGameScene() {
+        
+        #if os(OSX)
+        if let tempKeyBindings = UserDefaults.standard.dictionary(forKey: "PlayerKeys") {
+            for (key, value) in tempKeyBindings {
+                GameGlobals.instance.keyBindings[(key)] = (value as! String).first
+            }
+        }
+        #endif
+        
         stateMachine = GKStateMachine(states: [
             GameTitleState(withController: self),
             GamePlayState(withController: self),

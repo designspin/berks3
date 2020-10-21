@@ -90,7 +90,6 @@
 		583B8AC82538F25F0018DB60 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 58CB2CBE1FBB915D0052D3F9 /* GameScene.sks */; };
 		583B8ACD2538F2690018DB60 /* MainTiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 584530B91FC388DD00A42759 /* MainTiles.sks */; };
 		583B8AD22538F26C0018DB60 /* BrickTiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 584530BA1FC388DD00A42759 /* BrickTiles.sks */; };
-		583B8AD82539046E0018DB60 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583B8AD72539046E0018DB60 /* GameKit.framework */; };
 		583CA835208E83F80042270B /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 583CA834208E83F80042270B /* explosion.sks */; };
 		583CA837208E97760042270B /* ExplodeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583CA836208E97760042270B /* ExplodeComponent.swift */; };
 		583F255A207F4E7200BC5C41 /* KeyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F2559207F4E7200BC5C41 /* KeyEntity.swift */; };
@@ -98,6 +97,8 @@
 		58444BA4205B429600968A2E /* BoundaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58444BA3205B429600968A2E /* BoundaryEntity.swift */; };
 		584530BB1FC388DD00A42759 /* MainTiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 584530B91FC388DD00A42759 /* MainTiles.sks */; };
 		584530BC1FC388DD00A42759 /* BrickTiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 584530BA1FC388DD00A42759 /* BrickTiles.sks */; };
+		5845347F253E1309009E1189 /* GameplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5845347E253E1309009E1189 /* GameplayKit.framework */; };
+		58453481253E131B009E1189 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58453480253E131B009E1189 /* GameController.framework */; };
 		584605522023CBB1004F409E /* ScenePlayingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584605512023CBB1004F409E /* ScenePlayingState.swift */; };
 		584605542023CF8B004F409E /* SceneChangeRoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584605532023CF8B004F409E /* SceneChangeRoomState.swift */; };
 		58468711201FE1EB00AEB26A /* ColiderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58468710201FE1EB00AEB26A /* ColiderType.swift */; };
@@ -206,7 +207,6 @@
 		583B8A132538CCAD0018DB60 /* SceneCompletedState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCompletedState.swift; sourceTree = "<group>"; };
 		583B8A1D2538D0180018DB60 /* skscene+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "skscene+extension.swift"; sourceTree = "<group>"; };
 		583B8A232538D2AB0018DB60 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
-		583B8AD72539046E0018DB60 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
 		583CA834208E83F80042270B /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		583CA836208E97760042270B /* ExplodeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplodeComponent.swift; sourceTree = "<group>"; };
 		583F2559207F4E7200BC5C41 /* KeyEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEntity.swift; sourceTree = "<group>"; };
@@ -214,6 +214,8 @@
 		58444BA3205B429600968A2E /* BoundaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryEntity.swift; sourceTree = "<group>"; };
 		584530B91FC388DD00A42759 /* MainTiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainTiles.sks; sourceTree = "<group>"; };
 		584530BA1FC388DD00A42759 /* BrickTiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrickTiles.sks; sourceTree = "<group>"; };
+		5845347E253E1309009E1189 /* GameplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameplayKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/GameplayKit.framework; sourceTree = DEVELOPER_DIR; };
+		58453480253E131B009E1189 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		584605512023CBB1004F409E /* ScenePlayingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenePlayingState.swift; sourceTree = "<group>"; };
 		584605532023CF8B004F409E /* SceneChangeRoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneChangeRoomState.swift; sourceTree = "<group>"; };
 		58468710201FE1EB00AEB26A /* ColiderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColiderType.swift; sourceTree = "<group>"; };
@@ -291,7 +293,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				583B8AD82539046E0018DB60 /* GameKit.framework in Frameworks */,
+				5845347F253E1309009E1189 /* GameplayKit.framework in Frameworks */,
+				58453481253E131B009E1189 /* GameController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,7 +574,8 @@
 		58B0CC30209BA214005EA8DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				583B8AD72539046E0018DB60 /* GameKit.framework */,
+				58453480253E131B009E1189 /* GameController.framework */,
+				5845347E253E1309009E1189 /* GameplayKit.framework */,
 				589073A320F7DD8E009F5F6A /* GameController.framework */,
 				589073A420F7DD8F009F5F6A /* GameplayKit.framework */,
 				58B0CC31209BA214005EA8DF /* GameKit.framework */,
@@ -1024,6 +1028,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = Berks3/Berks3.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MQ4Z7LHEUG;
@@ -1033,8 +1038,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.Berks3;
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.berks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1048,6 +1054,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = Berks3/Berks3.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MQ4Z7LHEUG;
@@ -1056,8 +1063,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.Berks3;
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.berks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};

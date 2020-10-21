@@ -38,6 +38,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
     var fireBtn: FireButton!
     #endif
     
+    #if os(OSX)
+    var keyPresses: Dictionary<String, Bool> = ["FIRE": false, "UP": false, "RIGHT": false, "DOWN": false, "LEFT": false]
+    var previousKeyPresses: Dictionary<String, Bool> = ["FIRE": false, "UP": false, "RIGHT": false, "DOWN": false, "LEFT": false]
+    #endif
+    
     var lastProjectile:TimeInterval = 0
     var entityManager: EntityManager!
     var dt:TimeInterval = 0
@@ -417,6 +422,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
             
             if previousSnapShot is GCExtendedGamepad {
                 data = updateForExtendedController()
+            } else {
+                #if os(OSX)
+                if keyPresses["FIRE"]! {
+                    data.fire = true
+                }
+                if previousKeyPresses["FIRE"]! {
+                    data.previousFire = true
+                }
+                
+                var currentVec = CGVector(dx: 0, dy: 0)
+                var previousVec = CGVector(dx: 0, dy: 0)
+                
+                if keyPresses["UP"]! {
+                    currentVec.dy = 0.1 * 55
+                }
+                
+                if keyPresses["DOWN"]! {
+                    currentVec.dy = -0.1 * 55
+                }
+                
+                if keyPresses["LEFT"]! {
+                    currentVec.dx = -0.1 * 55
+                }
+                
+                if keyPresses["RIGHT"]! {
+                    currentVec.dx = 0.1 * 55
+                }
+                
+                if previousKeyPresses["UP"]! {
+                    previousVec.dy = 0.1 * 55
+                }
+                
+                if previousKeyPresses["DOWN"]! {
+                    previousVec.dy = -0.1 * 55
+                }
+                
+                if previousKeyPresses["LEFT"]! {
+                    previousVec.dx = -0.1 * 55
+                }
+                
+                if previousKeyPresses["RIGHT"]! {
+                    previousVec.dx = 0.1 * 55
+                }
+                
+                if currentVec.dx == 0 && currentVec.dy == 0 {
+                    data.current = nil
+                } else {
+                    data.current = currentVec
+                }
+                
+                if previousVec.dx == 0 && previousVec.dy == 0 {
+                    data.previous = nil
+                } else {
+                    data.previous = previousVec
+                }
+                #endif
             }
         
             /*if data.fire  && !data.previousFire {
@@ -449,7 +510,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
             
             if data.current != nil && data.previous != nil {
                 let vel = CGPoint(x: (data.current?.dx ?? 0), y: (data.current?.dy ?? 0))
-                
+                print(vel)
                 self.controlTrackingHandler(AnalogJoystickData(velocity: vel, angular: -atan2(vel.x, vel.y)))
                 
             }
@@ -461,6 +522,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
             }
             
             previousSnapShot = snapshot
+        
+            #if os(OSX)
+            previousKeyPresses = keyPresses
+            #endif
         }
     }
     
@@ -611,6 +676,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
                     }
                     break
                 }
+            }
+        }
+    }
+    #endif
+    
+    // MARK: Keyboard Handlers
+    #if os(OSX)
+    override func keyDown(with event: NSEvent) {
+        let temp: String = event.characters!
+        
+        for letter in temp {
+            switch letter {
+            case GameGlobals.instance.keyBindings["FIRE"]:
+                keyPresses["FIRE"] = true
+            case GameGlobals.instance.keyBindings["UP"]:
+                keyPresses["UP"] = true
+            case GameGlobals.instance.keyBindings["DOWN"]:
+                keyPresses["DOWN"] = true
+            case GameGlobals.instance.keyBindings["LEFT"]:
+                keyPresses["LEFT"] = true
+            case GameGlobals.instance.keyBindings["RIGHT"]:
+                keyPresses["RIGHT"] = true
+            default:
+                continue
+            }
+        }
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        let temp: String = event.characters!
+        
+        for letter in temp {
+            switch letter {
+            case GameGlobals.instance.keyBindings["FIRE"]:
+                keyPresses["FIRE"] = false
+            case GameGlobals.instance.keyBindings["UP"]:
+                keyPresses["UP"] = false
+            case GameGlobals.instance.keyBindings["DOWN"]:
+                keyPresses["DOWN"] = false
+            case GameGlobals.instance.keyBindings["LEFT"]:
+                keyPresses["LEFT"] = false
+            case GameGlobals.instance.keyBindings["RIGHT"]:
+                keyPresses["RIGHT"] = false
+            default:
+                continue
             }
         }
     }

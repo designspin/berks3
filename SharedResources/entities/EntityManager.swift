@@ -172,14 +172,14 @@ class EntityManager {
         hidden.removeAll()
         
         for entity in entities {
-            if entity.isKind(of: EdgeTileEntity.self) {
-                if let nodeComponent = entity.component(ofType: NodeComponent.self) {
-                    if(!rect.contains(nodeComponent.node.position)) {
-                        nodeComponent.node.removeFromParent()
-                        hidden.insert(entity)
-                    }
-                }
-            }
+//            if entity.isKind(of: EdgeTileEntity.self) {
+//                if let nodeComponent = entity.component(ofType: NodeComponent.self) {
+//                    if(!rect.contains(nodeComponent.node.position)) {
+//                        nodeComponent.node.removeFromParent()
+//                        hidden.insert(entity)
+//                    }
+//                }
+//            }
             if entity.isKind(of: BrickTileEntity.self) || entity.isKind(of: KeyEntity.self) || entity.isKind(of: LifeEntity.self) {
                 if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
                     if(!rect.contains(spriteComponent.node.position)) {

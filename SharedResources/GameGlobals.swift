@@ -24,6 +24,10 @@ class GameGlobals:NSObject {
     
     var gamecenter = false
     
+    #if os(OSX)
+    var keyBindings: [String: Character] = ["LEFT": "z", "RIGHT": "x", "UP": "f", "DOWN": "c", "FIRE": "g"]
+    #endif
+    
     enum difficultySetting:Int {
         
         case Duffer

@@ -8,7 +8,7 @@
 
 import GameKit
 
-protocol GameManager: class {
+protocol GameManager: AnyObject {
     var stateMachine: GKStateMachine! { get set }
     var currentScene: SKScene? { get set }
     var emptyTiles:[Int:Array<CGRect>] { get set }

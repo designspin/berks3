@@ -9,7 +9,7 @@
 import SpriteKit
 import GameKit
 
-protocol PlayerEntityManager: class {
+protocol PlayerEntityManager: AnyObject {
     var playerState: GKStateMachine! { get set }
     
     func didEnterInvincibleState()

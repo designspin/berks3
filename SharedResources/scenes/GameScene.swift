@@ -11,7 +11,7 @@ import GameKit
 import GameplayKit
 import GameController
 
-protocol GameSceneManager: class {
+protocol GameSceneManager: AnyObject {
     var sceneState: GKStateMachine! { get set }
     var player:PlayerEntity! { get set }
     var entityManager:EntityManager! { get set }

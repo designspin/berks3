@@ -68,7 +68,7 @@ enum EntityDirection: UInt32 {
     }
 }
 
-protocol BerkEntityManager: class {
+protocol BerkEntityManager: AnyObject {
     var berkState: GKStateMachine! { get set }
     var constrain: SKConstraint? { get set }
 }

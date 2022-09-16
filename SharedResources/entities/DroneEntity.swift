@@ -9,7 +9,7 @@
 import SpriteKit
 import GameKit
 
-protocol DroneEntityProtocol: class {
+protocol DroneEntityProtocol: AnyObject {
     var entityMg: EntityManager {get set}
     var droneState: GKStateMachine! {get set}
     

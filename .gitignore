@@ -1,0 +1,21 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+
+# Backups
+*.backup
+
+# macOS
+.DS_Store
+
+# CocoaPods (if used in future)
+Pods/
+
+# Fastlane (if used in future)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/

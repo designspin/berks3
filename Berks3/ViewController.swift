@@ -33,6 +33,8 @@ public struct AnalogJoystickData: CustomStringConvertible {
 
 class ViewController: NSViewController, GKGameCenterControllerDelegate, GameManager {
     
+    @IBOutlet var skView: SKView!
+    
     var stateMachine: GKStateMachine!
     var currentScene: SKScene?
     var emptyTiles = [Int : Array<CGRect>]()
@@ -389,19 +391,24 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     func authenticateLocalPlayer() {
         let localPlayer: GKLocalPlayer = GKLocalPlayer.local
         
-        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
-            if ViewController != nil {
-                //self.present(ViewController!, animated: true, completion: nil)
-                self.presentAsSheet(ViewController!)
-            } else if(localPlayer.isAuthenticated) {
-                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: {(leaderboardIdentifier, error) in
-                    if error != nil {
-                        print(String(describing: error))
-                    } else {
-                        
-                    }
-                })
-                
+        print("🎮 Attempting Game Center authentication...")
+        print("   Local player authenticated: \(localPlayer.isAuthenticated)")
+        
+        localPlayer.authenticateHandler = { viewController, error in
+            print("🎮 Authentication handler called")
+            print("   View controller presented: \(viewController != nil)")
+            print("   Is authenticated: \(localPlayer.isAuthenticated)")
+            print("   Error: \(error?.localizedDescription ?? "none")")
+            
+            if let viewController = viewController {
+                // Present the Game Center login view controller
+                print("📱 Presenting Game Center authentication sheet...")
+                self.presentAsSheet(viewController)
+            } else if localPlayer.isAuthenticated {
+                // Successfully authenticated
+                print("✅ Game Center authenticated successfully!")
+                print("   Player ID: \(localPlayer.gamePlayerID)")
+                print("   Display Name: \(localPlayer.displayName)")
                 GameGlobals.instance.gamecenter = true
                 
                 if self.currentScene is TitleScene {
@@ -410,14 +417,29 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
                     }
                 }
             } else {
-                print("Local player could not be authenticated!")
+                // Authentication failed or unavailable
+                if let error = error {
+                    print("❌ Game Center authentication failed: \(error.localizedDescription)")
+                    print("   Error domain: \((error as NSError).domain)")
+                    print("   Error code: \((error as NSError).code)")
+                    if (error as NSError).code == 6 {
+                        print("   ℹ️  This is normal in development mode - Game Center will work in production")
+                    }
+                } else {
+                    print("⚠️ Game Center authentication unavailable")
+                    print("   ℹ️  Game will continue without leaderboard support")
+                    print("   ℹ️  This is normal in development - Game Center will work when published to App Store")
+                }
+                GameGlobals.instance.gamecenter = false
+                
+                // Game continues normally without Game Center
+                print("✅ Game ready to play (without Game Center)")
             }
         }
     }
     
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-       // gameCenterViewController.dismiss(animated: true, completion: nil)
-        gameCenterViewController.dismiss(gameCenterViewController)
+        dismiss(gameCenterViewController)
     }
     
     func submitScore() {
@@ -487,7 +509,6 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     func didEnterTitleScene() {
         let scene = TitleScene(size: CGSize(width: 640, height: 352))
         scene.name = "TitleScene"
-        let skView = self.view as! SKView
         scene.scaleMode = .aspectFit
         scene.gamemanager = self
         skView.presentScene(scene)
@@ -496,7 +517,6 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     
     func didEnterPlayScene() {
         let scene = setupGameScene()
-        let skView = self.view as! SKView
         scene.name = "GameScene"
         scene.gamemanager = self
         scene.scaleMode = .aspectFit
@@ -507,7 +527,6 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     func didEnterGameOverScene() {
         let scene = GameOverScene(size: CGSize(width: 640, height: 352))
         scene.name = "GameOverScene"
-        let skView = self.view as! SKView
         scene.scaleMode = .aspectFit
         scene.gamemanager = self
         skView.presentScene(scene)
@@ -538,15 +557,12 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
             print("Adding extended controller")
             gamePad = controller.extendedGamepad
             controller.playerIndex = .index1
-        } else if let _ = controller.gamepad {
-            print("Adding controller")
-            gamePad = controller.gamepad
-            controller.playerIndex = .index1
         } else if let _ = controller.microGamepad {
+            print("Adding micro controller")
             gamePad = controller.microGamepad
             controller.playerIndex = .index1
         } else {
-            print("Huh?!")
+            print("Unsupported controller type")
         }
         
         if currentScene is GameScene {

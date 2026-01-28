@@ -367,20 +367,15 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     //MARK: Game Center
     
     func authenticateLocalPlayer() {
-        let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.local
         
-        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
-            if ViewController != nil {
-                self.present(ViewController!, animated: true, completion: nil)
-            } else if(localPlayer.isAuthenticated) {
-                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: {(leaderboardIdentifier, error) in
-                    if error != nil {
-                        print(String(describing: error))
-                    } else {
-                        
-                    }
-                })
-                
+        localPlayer.authenticateHandler = { viewController, error in
+            if let viewController = viewController {
+                // Present the Game Center login view controller
+                self.present(viewController, animated: true, completion: nil)
+            } else if localPlayer.isAuthenticated {
+                // Successfully authenticated
+                print("✅ Game Center authenticated successfully!")
                 GameGlobals.instance.gamecenter = true
                 
                 if self.currentScene is TitleScene {
@@ -389,7 +384,13 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
                     }
                 }
             } else {
-                print("Local player could not be authenticated!")
+                // Authentication failed
+                if let error = error {
+                    print("❌ Game Center authentication failed: \(error.localizedDescription)")
+                } else {
+                    print("⚠️ Game Center authentication disabled or unavailable")
+                }
+                GameGlobals.instance.gamecenter = false
             }
         }
     }
@@ -517,15 +518,12 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             print("Adding extended controller")
             gamePad = controller.extendedGamepad
             controller.playerIndex = .index1
-        } else if let _ = controller.gamepad {
-            print("Adding controller")
-            gamePad = controller.gamepad
-            controller.playerIndex = .index1
         } else if let _ = controller.microGamepad {
+            print("Adding micro controller")
             gamePad = controller.microGamepad
             controller.playerIndex = .index1
         } else {
-            print("Huh?!")
+            print("Unsupported controller type")
         }
         
         if currentScene is GameScene {

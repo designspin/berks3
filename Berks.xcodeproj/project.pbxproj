@@ -20,7 +20,6 @@
 		583B8A142538CCAD0018DB60 /* SceneCompletedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583B8A132538CCAD0018DB60 /* SceneCompletedState.swift */; };
 		583B8A1E2538D0180018DB60 /* skscene+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583B8A1D2538D0180018DB60 /* skscene+extension.swift */; };
 		583B8A242538D2AB0018DB60 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583B8A232538D2AB0018DB60 /* GameManager.swift */; };
-		583B8A292538D5AA0018DB60 /* berksMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471720E6C4D800457484 /* berksMusic.wav */; };
 		583B8A2A2538D5AA0018DB60 /* brickDestroy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA470D20E6C4D000457484 /* brickDestroy.wav */; };
 		583B8A2B2538D5AA0018DB60 /* lazer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA472520E6EB4700457484 /* lazer.wav */; };
 		583B8A2C2538D5AA0018DB60 /* playerExplosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471420E6C4D400457484 /* playerExplosion.wav */; };
@@ -151,7 +150,6 @@
 		58AA472020E6C4D800457484 /* playerExplosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471420E6C4D400457484 /* playerExplosion.wav */; };
 		58AA472120E6C4D800457484 /* droneHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471520E6C4D500457484 /* droneHit.wav */; };
 		58AA472220E6C4D800457484 /* bump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471620E6C4D500457484 /* bump.wav */; };
-		58AA472320E6C4D800457484 /* berksMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471720E6C4D800457484 /* berksMusic.wav */; };
 		58AA472420E6C4D800457484 /* brickDestroyFinal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA471820E6C4D800457484 /* brickDestroyFinal.wav */; };
 		58AA472620E6EB4700457484 /* lazer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 58AA472520E6EB4700457484 /* lazer.wav */; };
 		58B0CC32209BA214005EA8DF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B0CC31209BA214005EA8DF /* GameKit.framework */; };
@@ -167,6 +165,8 @@
 		58D0D84B20A9A68000E3F352 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D0D84A20A9A68000E3F352 /* Images.xcassets */; };
 		58EFAED8207E4710006CA5CC /* DashboardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EFAED7207E4710006CA5CC /* DashboardSprite.swift */; };
 		58F52120208A2822004EA2FA /* LifeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5211F208A2822004EA2FA /* LifeEntity.swift */; };
+		96B8C6EC2F2ADD5B00A5922C /* berksMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */; };
+		96B8C6ED2F2ADD5B00A5922C /* berksMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,7 +268,6 @@
 		58AA471420E6C4D400457484 /* playerExplosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = playerExplosion.wav; sourceTree = "<group>"; };
 		58AA471520E6C4D500457484 /* droneHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = droneHit.wav; sourceTree = "<group>"; };
 		58AA471620E6C4D500457484 /* bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bump.wav; sourceTree = "<group>"; };
-		58AA471720E6C4D800457484 /* berksMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = berksMusic.wav; sourceTree = "<group>"; };
 		58AA471820E6C4D800457484 /* brickDestroyFinal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = brickDestroyFinal.wav; sourceTree = "<group>"; };
 		58AA472520E6EB4700457484 /* lazer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lazer.wav; sourceTree = "<group>"; };
 		58B0CC31209BA214005EA8DF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -286,6 +285,7 @@
 		58D0D84A20A9A68000E3F352 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		58EFAED7207E4710006CA5CC /* DashboardSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSprite.swift; sourceTree = "<group>"; };
 		58F5211F208A2822004EA2FA /* LifeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeEntity.swift; sourceTree = "<group>"; };
+		96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = berksMusic.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,8 +328,8 @@
 		5814338720861EA40016BA7E /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */,
 				58AA471020E6C4D200457484 /* berkHit.wav */,
-				58AA471720E6C4D800457484 /* berksMusic.wav */,
 				58AA470D20E6C4D000457484 /* brickDestroy.wav */,
 				58AA471820E6C4D800457484 /* brickDestroyFinal.wav */,
 				58AA471620E6C4D500457484 /* bump.wav */,
@@ -779,7 +779,6 @@
 				583B8A2A2538D5AA0018DB60 /* brickDestroy.wav in Resources */,
 				583B89E02538C97E0018DB60 /* Assets.xcassets in Resources */,
 				583B8A332538D5AA0018DB60 /* keyPickup.wav in Resources */,
-				583B8A292538D5AA0018DB60 /* berksMusic.wav in Resources */,
 				583B8A312538D5AA0018DB60 /* extraLive.wav in Resources */,
 				583B8A6A2538D5EB0018DB60 /* explosion.sks in Resources */,
 				583B8A2D2538D5AA0018DB60 /* prize.wav in Resources */,
@@ -789,6 +788,7 @@
 				583B8A752538D5EB0018DB60 /* lazerSpark.sks in Resources */,
 				583B89DA2538C97D0018DB60 /* Actions.sks in Resources */,
 				583B89E32538C97E0018DB60 /* Main.storyboard in Resources */,
+				96B8C6EC2F2ADD5B00A5922C /* berksMusic.m4a in Resources */,
 				583B8A3F2538D5BC0018DB60 /* title.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -825,7 +825,6 @@
 				58A352F3207D8B45007F2633 /* title.fsh in Resources */,
 				58CB2CBF1FBB915D0052D3F9 /* GameScene.sks in Resources */,
 				5895B8862024FB4500ED13F9 /* berks.atlas in Resources */,
-				58AA472320E6C4D800457484 /* berksMusic.wav in Resources */,
 				58AA471B20E6C4D800457484 /* prize.wav in Resources */,
 				58AA471C20E6C4D800457484 /* berkHit.wav in Resources */,
 				58D0D84B20A9A68000E3F352 /* Images.xcassets in Resources */,
@@ -833,6 +832,7 @@
 				58AA472620E6EB4700457484 /* lazer.wav in Resources */,
 				584530BC1FC388DD00A42759 /* BrickTiles.sks in Resources */,
 				58AA472020E6C4D800457484 /* playerExplosion.wav in Resources */,
+				96B8C6ED2F2ADD5B00A5922C /* berksMusic.m4a in Resources */,
 				58CB2CCD1FBB915D0052D3F9 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

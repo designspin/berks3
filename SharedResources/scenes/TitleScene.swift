@@ -178,10 +178,18 @@ class TitleScene: SKScene {
         
         title.run(SKAction.repeatForever(sequence))
         
-        let backgroundSound = SKAudioNode(fileNamed: "berksMusic")
+        let backgroundSound = SKAudioNode(fileNamed: "berksMusic.m4a")
         backgroundSound.isPositional = false
-        backgroundSound.run(SKAction.changeVolume(by: 5, duration: 0.1))
+        backgroundSound.autoplayLooped = false
         self.addChild(backgroundSound)
+
+        // Fade in music after brief delay to let audio system initialize
+        let startMusic = SKAction.sequence([
+            SKAction.wait(forDuration: 0.7),
+            SKAction.run { backgroundSound.run(SKAction.play()) },
+            SKAction.run { backgroundSound.run(SKAction.changeVolume(by: 5.0, duration: 0.5)) }
+        ])
+        self.run(startMusic)
         controllerSetup()
     }
     

@@ -19,3 +19,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/
 fastlane/test_output/
+
+# Node.js / VitePress
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/

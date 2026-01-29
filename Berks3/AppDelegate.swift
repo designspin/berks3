@@ -11,10 +11,15 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+    }
+
+    @IBAction func openHelp(_ sender: Any) {
+        if let url = URL(string: "https://designspin.github.io/berks3/") {
+            NSWorkspace.shared.open(url)
+        }
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

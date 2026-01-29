@@ -10,7 +10,8 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'How to Play', link: '/how-to-play' },
-      { text: 'Controls', link: '/controls' }
+      { text: 'Controls', link: '/controls' },
+      { text: 'Privacy', link: '/privacy' }
     ],
 
     sidebar: [
@@ -19,6 +20,12 @@ export default defineConfig({
         items: [
           { text: 'How to Play', link: '/how-to-play' },
           { text: 'Controls', link: '/controls' }
+        ]
+      },
+      {
+        text: 'Legal',
+        items: [
+          { text: 'Privacy Policy', link: '/privacy' }
         ]
       }
     ],

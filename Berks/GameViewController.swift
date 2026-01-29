@@ -222,7 +222,16 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     override func viewDidAppear(_ animated: Bool) {
         self.startWatchingForControllers()
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update scene layout when view resizes (iPad split view, rotation, etc.)
+        if let skView = self.view as? SKView,
+           let gameScene = currentScene as? GameScene {
+            gameScene.updateLayoutForViewSize(skView.bounds.size)
+        }
+    }
+
     func initGameScene() {
         stateMachine = GKStateMachine(states: [
             GameTitleState(withController: self),
@@ -400,17 +409,17 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     func submitScore() {
-        let score = GKScore(leaderboardIdentifier: "co.uk.berks.\(GameGlobals.instance.currentDifficulty.identifier())")
-        score.value = Int64(GameGlobals.instance.score)
-        
-        if score.value > GameGlobals.instance.highScore {
-            GameGlobals.instance.highScore = Int(score.value)
-            UserDefaults.standard.set(Int(score.value), forKey: "berksHighScore")
+        let scoreValue = GameGlobals.instance.score
+        let leaderboardID = "co.uk.berks.\(GameGlobals.instance.currentDifficulty.identifier())"
+
+        if scoreValue > GameGlobals.instance.highScore {
+            GameGlobals.instance.highScore = scoreValue
+            UserDefaults.standard.set(scoreValue, forKey: "berksHighScore")
         }
-        
-        GKScore.report([score]) {(error) in
-            if error != nil {
-                print(error!.localizedDescription)
+
+        GKLeaderboard.submitScore(scoreValue, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardID]) { error in
+            if let error = error {
+                print(error.localizedDescription)
             } else {
                 print("Best score submitted")
             }
@@ -418,10 +427,8 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     func showLeaderboard() {
-        let gc = GKGameCenterViewController()
+        let gc = GKGameCenterViewController(state: .leaderboards)
         gc.gameCenterDelegate = self
-        gc.viewState = .leaderboards
-        //gc.leaderboardIdentifier = "co.uk.berks.\(GameGlobals.instance.currentDifficulty.identifier())"
         present(gc, animated: true, completion: nil)
     }
     
@@ -479,7 +486,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         let skView = self.view as! SKView
         scene.name = "GameScene"
         scene.gamemanager = self
-        scene.scaleMode = .aspectFit
+        scene.scaleMode = .fill  // Scene calculates own size to match view
         skView.presentScene(scene)
         currentScene = scene
     }

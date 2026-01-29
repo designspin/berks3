@@ -195,7 +195,7 @@ class PlayerEntity: GKEntity, ContactNotifiableType, PlayerEntityManager {
             if !isInvincible {
                 if let spriteComponent = component(ofType: SpriteComponent.self) {
                     spriteComponent.node.removeAllActions()
-                    weak var scene = spriteComponent.node.scene as? GameScene
+                    let scene = spriteComponent.node.scene as? GameScene
                     scene?.shakeCamera(duration: 2)
                 }
                 removeComponent(ofType: ControlledComponent.self)

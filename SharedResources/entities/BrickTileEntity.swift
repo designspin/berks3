@@ -164,7 +164,7 @@ class BrickTileEntity: GKEntity, ContactNotifiableType {
                 }
                 
                 let actionBlock = SKAction.run {[unowned self] in
-                    weak var accessEntityManager  = spriteComponent.node.scene as? GameScene
+                    let accessEntityManager = spriteComponent.node.scene as? GameScene
                     
                     accessEntityManager?.entityManager.remove(entity: self)
                     self.removeComponent(ofType: SpriteComponent.self)

@@ -54,7 +54,7 @@ class DoorEntity: GKEntity, ContactNotifiableType {
         let fadeAction = SKAction.fadeOut(withDuration: 0.5)
         let blockAction = SKAction.run {[unowned self] in
             if let spriteComponent = self.component(ofType: SpriteComponent.self) {
-                weak var mg = spriteComponent.node.scene as? GameScene
+                let mg = spriteComponent.node.scene as? GameScene
                 mg?.entityManager.remove(entity: self)
             }
         }

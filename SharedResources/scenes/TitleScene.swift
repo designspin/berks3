@@ -65,23 +65,23 @@ class TitleScene: SKScene {
         
         addChild(cropNode)
         
-        let leaderboards = SKSpriteNode()
-        leaderboards.color = .blue
-        leaderboards.size = CGSize(width: 300, height: 40)
+        let leaderboards = SKShapeNode(rect: CGRect(x: -150, y: -20, width: 300, height: 40), cornerRadius: 10)
+        leaderboards.fillColor = SKColor(red: 0.1, green: 0.3, blue: 0.6, alpha: 0.8)
+        leaderboards.strokeColor = SKColor(red: 0.3, green: 0.5, blue: 0.9, alpha: 1.0)
+        leaderboards.lineWidth = 2
         leaderboards.position = CGPoint(x: size.width / 2, y: size.height / 2 - 10)
         leaderboards.name = "viewScores"
-        
+
         if !GameGlobals.instance.gamecenter {
             leaderboards.alpha = 0
         }
-        
+
         let leaderText = SKLabelNode(fontNamed: "AvenirNext-DemiBold")
         leaderText.text = "View Leaderboards"
         leaderText.verticalAlignmentMode = .center
         leaderText.horizontalAlignmentMode = .center
         leaderText.fontSize = 20
         leaderText.name = "viewScoresLabel"
-        //leaderText.position = CGPoint(x: leaderboards.size.width / 2, y: leaderboards.size.height / 2)
         leaderboards.addChild(leaderText)
         addChild(leaderboards)
         
@@ -108,12 +108,13 @@ class TitleScene: SKScene {
         GameGlobals.instance.addListener(name: "difficulty", object: difficultyText)
         
         #if os(OSX)
-        let configureKeys = SKSpriteNode()
-        configureKeys.color = .blue
-        configureKeys.size = CGSize(width: 300, height: 40)
+        let configureKeys = SKShapeNode(rect: CGRect(x: -150, y: -20, width: 300, height: 40), cornerRadius: 10)
+        configureKeys.fillColor = SKColor(red: 0.1, green: 0.3, blue: 0.6, alpha: 0.8)
+        configureKeys.strokeColor = SKColor(red: 0.3, green: 0.5, blue: 0.9, alpha: 1.0)
+        configureKeys.lineWidth = 2
         configureKeys.position = CGPoint(x: size.width / 2, y: size.height / 2 - 125)
         configureKeys.name = "configureKeys"
-        
+
         let configureKeysText = SKLabelNode(fontNamed: "AvenirNext-DemiBold")
         configureKeysText.text = "Configure Keys"
         configureKeysText.verticalAlignmentMode = .center
@@ -134,7 +135,7 @@ class TitleScene: SKScene {
         addChild(originalAuthor)
         
         let rewrite = SKLabelNode(fontNamed: "AvenirNext-Regular")
-        rewrite.text = "Re-Written for IOS by Jason Foster"
+        rewrite.text = "Re-Written by Jason Foster"
         rewrite.position = CGPoint(x: size.width / 2, y: size.height / 2 + 45 )
         rewrite.verticalAlignmentMode = .baseline
         rewrite.horizontalAlignmentMode = .center
@@ -199,7 +200,7 @@ class TitleScene: SKScene {
     
     func controllerSetup() {
         if gamemanager.gamePad is GCExtendedGamepad {
-            weak var pad = gamemanager.gamePad as? GCExtendedGamepad
+            let pad = gamemanager.gamePad as? GCExtendedGamepad
             
             pad?.dpad.left.pressedChangedHandler = {[unowned self] (button, value, pressed) in
                 if pressed {
@@ -232,7 +233,7 @@ class TitleScene: SKScene {
     
     func controllerReset() {
         if gamemanager.gamePad is GCExtendedGamepad {
-            weak var pad = gamemanager.gamePad as? GCExtendedGamepad
+            let pad = gamemanager.gamePad as? GCExtendedGamepad
             
             pad?.dpad.left.pressedChangedHandler = nil
             pad?.dpad.right.pressedChangedHandler = nil

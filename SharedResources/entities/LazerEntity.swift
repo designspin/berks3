@@ -65,8 +65,8 @@ class LazerEntity: GKEntity, ContactNotifiableType {
         }*/
         
         if let spriteComponent = component(ofType: SpriteComponent.self) {
-            weak var accessEntityManager  = spriteComponent.node.scene as? GameScene
-            
+            let accessEntityManager = spriteComponent.node.scene as? GameScene
+
             accessEntityManager?.entityManager.remove(entity: self)
         }
         

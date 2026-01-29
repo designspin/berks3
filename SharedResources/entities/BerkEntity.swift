@@ -152,7 +152,7 @@ class BerkEntity: GKEntity, BerkEntityManager, ContactNotifiableType {
         
         
         if let spriteComponent = component(ofType: SpriteComponent.self) {
-            weak var accessEntityManager  = spriteComponent.node.scene as? GameScene
+            let accessEntityManager = spriteComponent.node.scene as? GameScene
             
             spriteComponent.node.removeAllActions()
             

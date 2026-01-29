@@ -169,23 +169,59 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
         print("Deinit game scene")
     }
     
+    // MARK: Room constants
+    static let roomSize = CGSize(width: 640, height: 352)
+    static let roomAspect = roomSize.width / roomSize.height  // ~1.818
+
+    // MARK: Update layout for view size (handles window resize)
+    func updateLayoutForViewSize(_ viewSize: CGSize) {
+        let viewAspect = viewSize.width / viewSize.height
+
+        var sceneWidth: CGFloat
+        var sceneHeight: CGFloat
+
+        if viewAspect > GameScene.roomAspect {
+            // View is wider than room - room fills height, letterbox on sides
+            sceneHeight = GameScene.roomSize.height
+            sceneWidth = GameScene.roomSize.height * viewAspect
+        } else {
+            // View is taller than room - room fills width, letterbox top/bottom
+            sceneWidth = GameScene.roomSize.width
+            sceneHeight = GameScene.roomSize.width / viewAspect
+        }
+
+        self.size = CGSize(width: sceneWidth, height: sceneHeight)
+
+        // Update retro border if it exists
+        if let oldBorder = cam?.childNode(withName: "RetroBorder") {
+            oldBorder.removeFromParent()
+            let newBorder = RetroBorderNode(sceneSize: self.size, roomSize: GameScene.roomSize)
+            newBorder.name = "RetroBorder"
+            newBorder.zPosition = 998
+            cam.addChild(newBorder)
+        }
+
+        // Update dashboard position (moves to/from letterbox based on available space)
+        if let oldHud = cam?.childNode(withName: "Dashboard") {
+            oldHud.removeFromParent()
+            let letterboxHeight = max(0, (self.size.height - GameScene.roomSize.height) / 2)
+            let newHud = DashboardSprite(roomSize: GameScene.roomSize, letterboxHeight: letterboxHeight)
+            newHud.name = "Dashboard"
+            cam.addChild(newHud)
+        }
+    }
+
     // MARK: Did move to view
-    
+
     override func didMove(to view: SKView) {
         #if os(iOS) || os(tvOS) || os(watchOS)
         fingers = [UITouch?](repeating: nil, count: 2)
         #endif
-        
+
         visibleRect = CGRect(x: 0, y: 1410, width: 640, height: 352)
-        // MARK: Resize View Based On Bounds
-        var size = self.size;
-        
-        let newheight = view.bounds.size.height / view.bounds.size.width * size.width
-        
-        if newheight > size.height {
-            size.height = newheight
-            self.size = size
-        }
+
+        // Calculate initial scene size based on view
+        updateLayoutForViewSize(view.bounds.size)
         
         // Add edgeTile collision
         for edgeTile in gamemanager.edgeTiles {
@@ -230,20 +266,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
         boundary.reset()
         entityManager.add(entity: boundary)
         
-        // reset camera
-        
+        // reset camera - centered on first room
         cam = SKCameraNode()
-        cam.position = CGPoint(x: 0 + self.frame.size.width / 2, y: 1760 - self.frame.size.height / 2)
+        cam.position = CGPoint(x: 320, y: 1586)  // Center of room (1410 + 352/2)
         cam.name = "Camera"
-        //MARK: Create Dashboard
-        
-        let calcPosX = -self.frame.size.width / 2
-        let calcPosY = -self.frame.size.height / 2
-        let calcHeight = self.frame.size.height - 352
-        
-        let cover = DashboardSprite(CGRect(x: calcPosX, y: calcPosY, width: self.frame.size.width, height: calcHeight))
-        cover.name = "Dashboard"
-        cam.addChild(cover)
+
+        //MARK: Create retro border effect in letterbox areas
+        let retroBorder = RetroBorderNode(sceneSize: self.size, roomSize: GameScene.roomSize)
+        retroBorder.name = "RetroBorder"
+        retroBorder.zPosition = 998  // In front of game, behind HUD
+        cam.addChild(retroBorder)
+
+        //MARK: Create HUD - in letterbox if there's room, otherwise overlay
+        let letterboxHeight = max(0, (self.size.height - GameScene.roomSize.height) / 2)
+        let hud = DashboardSprite(roomSize: GameScene.roomSize, letterboxHeight: letterboxHeight)
+        hud.name = "Dashboard"
+        cam.addChild(hud)
         
         //MARK: Setup Joypad
         #if os(iOS) || os(tvOS) || os(watchOS)
@@ -268,8 +306,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
         self.addChild(cam)
         
         // MARK: Init and Add Player
-    
-        self.player = PlayerEntity(location: CGPoint(x: cam.position.x, y: cam.position.y + calcHeight / 2))
+        // Spawn at center of starting room
+        self.player = PlayerEntity(location: CGPoint(x: cam.position.x, y: cam.position.y))
         
         entityManager.add(entity: player)
         
@@ -326,7 +364,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
         
         if sceneState.currentState?.isKind(of: ScenePlayingState.self) ?? false {
             if let gamePad = gamemanager.gamePad as? GCExtendedGamepad {
-               snapshot = gamePad.saveSnapshot()
+                snapshot = gamePad.controller?.capture().extendedGamepad
             }
         }
         
@@ -349,14 +387,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneManager {
     
     func controllerSetup() {
         if gamemanager.gamePad is GCExtendedGamepad {
-            weak var pad = gamemanager.gamePad as? GCExtendedGamepad
-            
-            pad?.controller?.controllerPausedHandler = {[unowned self] (GCController) in
-                
-                if self.sceneState.currentState is ScenePausedState {
-                    self.sceneState.enter(ScenePlayingState.self)
-                } else {
-                    self.sceneState.enter(ScenePausedState.self)
+            let pad = gamemanager.gamePad as? GCExtendedGamepad
+
+            // Use menu button instead of deprecated controllerPausedHandler
+            pad?.buttonMenu.pressedChangedHandler = { [unowned self] (button, value, pressed) in
+                if pressed {
+                    if self.sceneState.currentState is ScenePausedState {
+                        self.sceneState.enter(ScenePlayingState.self)
+                    } else {
+                        self.sceneState.enter(ScenePausedState.self)
+                    }
                 }
             }
         }

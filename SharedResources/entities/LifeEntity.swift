@@ -53,7 +53,7 @@ class LifeEntity: GKEntity, ContactNotifiableType {
         if entity.isKind(of: PlayerEntity.self) && !collected {
             if let spriteComponent = component(ofType: SpriteComponent.self) {
                 self.collected = true
-                weak var accessEntityManager = spriteComponent.node.scene as? GameScene
+                let accessEntityManager = spriteComponent.node.scene as? GameScene
                 removeComponent(ofType: PhysicsComponent.self)
                 let fade = SKAction.fadeOut(withDuration: 0.5)
                 

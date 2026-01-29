@@ -45,7 +45,7 @@ class PrizeEntity:GKEntity, ContactNotifiableType {
     func contactWithEntityDidBegin(_ entity: GKEntity, contactPoint: CGPoint) {
         if entity.isKind(of: PlayerEntity.self) {
             if let spriteComponent = component(ofType: SpriteComponent.self) {
-                weak var scene = spriteComponent.node.scene as? GameScene
+                let scene = spriteComponent.node.scene as? GameScene
                 
                 if let animComponent = component(ofType: AnimComponent.self) {
                     animComponent.repeatRunAnimation(name: "collected", timePerFrame: 0.1)

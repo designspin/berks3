@@ -235,6 +235,14 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     override func viewDidAppear() {
         self.startWatchingForControllers()
     }
+
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        // Update scene layout when window resizes
+        if let gameScene = currentScene as? GameScene {
+            gameScene.updateLayoutForViewSize(skView.bounds.size)
+        }
+    }
     
     func initGameScene() {
         
@@ -443,17 +451,17 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     }
     
     func submitScore() {
-        let score = GKScore(leaderboardIdentifier: "co.uk.berks.\(GameGlobals.instance.currentDifficulty.identifier())")
-        score.value = Int64(GameGlobals.instance.score)
-        
-        if score.value > GameGlobals.instance.highScore {
-            GameGlobals.instance.highScore = Int(score.value)
-            UserDefaults.standard.set(Int(score.value), forKey: "berksHighScore")
+        let scoreValue = GameGlobals.instance.score
+        let leaderboardID = "co.uk.berks.\(GameGlobals.instance.currentDifficulty.identifier())"
+
+        if scoreValue > GameGlobals.instance.highScore {
+            GameGlobals.instance.highScore = scoreValue
+            UserDefaults.standard.set(scoreValue, forKey: "berksHighScore")
         }
-        
-        GKScore.report([score]) {(error) in
-            if error != nil {
-                print(error!.localizedDescription)
+
+        GKLeaderboard.submitScore(scoreValue, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardID]) { error in
+            if let error = error {
+                print(error.localizedDescription)
             } else {
                 print("Best score submitted")
             }
@@ -461,12 +469,8 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
     }
     
     func showLeaderboard() {
-        let gc = GKGameCenterViewController()
-        gc.gameCenterDelegate = self
-        gc.viewState = .leaderboards
-        //present(gc, animated: true, completion: nil)
-        //present(gc, animator: NSViewControllerPresentationAnimator)
-        presentAsSheet(gc)
+        // Use GKAccessPoint to trigger Game Center overlay directly (no extra modal)
+        GKAccessPoint.shared.trigger(state: .leaderboards) { }
     }
     
     func setupGameScene() -> GameScene {
@@ -519,7 +523,7 @@ class ViewController: NSViewController, GKGameCenterControllerDelegate, GameMana
         let scene = setupGameScene()
         scene.name = "GameScene"
         scene.gamemanager = self
-        scene.scaleMode = .aspectFit
+        scene.scaleMode = .fill  // Scene calculates own size to match view
         skView.presentScene(scene)
         currentScene = scene
     }

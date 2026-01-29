@@ -188,7 +188,7 @@ class GameGlobals:NSObject {
     }
     
     func reset() {
-        lives = 5 /* 5 */
+        lives = 5
         score = 0
         room = 1
         keys = 0

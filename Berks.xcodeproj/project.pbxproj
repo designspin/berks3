@@ -165,6 +165,7 @@
 		58D0D84B20A9A68000E3F352 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D0D84A20A9A68000E3F352 /* Images.xcassets */; };
 		58EFAED8207E4710006CA5CC /* DashboardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EFAED7207E4710006CA5CC /* DashboardSprite.swift */; };
 		58F52120208A2822004EA2FA /* LifeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5211F208A2822004EA2FA /* LifeEntity.swift */; };
+		9616FB162F2C1412007CF055 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9616FB152F2C1411007CF055 /* SceneDelegate.swift */; };
 		96B8C6EC2F2ADD5B00A5922C /* berksMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */; };
 		96B8C6ED2F2ADD5B00A5922C /* berksMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */; };
 		96B8C7022F2AE00000A5922C /* RetroBorderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B8C7012F2AE00000A5922C /* RetroBorderNode.swift */; };
@@ -287,6 +288,7 @@
 		58D0D84A20A9A68000E3F352 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		58EFAED7207E4710006CA5CC /* DashboardSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSprite.swift; sourceTree = "<group>"; };
 		58F5211F208A2822004EA2FA /* LifeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeEntity.swift; sourceTree = "<group>"; };
+		9616FB152F2C1411007CF055 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		96B8C6EB2F2ADD5B00A5922C /* berksMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = berksMusic.m4a; sourceTree = "<group>"; };
 		96B8C7012F2AE00000A5922C /* RetroBorderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroBorderNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -612,6 +614,7 @@
 		58CB2CBB1FBB915D0052D3F9 /* Berks */ = {
 			isa = PBXGroup;
 			children = (
+				9616FB152F2C1411007CF055 /* SceneDelegate.swift */,
 				58CB2CBC1FBB915D0052D3F9 /* AppDelegate.swift */,
 				58CB2CC41FBB915D0052D3F9 /* GameViewController.swift */,
 				58CB2CC61FBB915D0052D3F9 /* Main.storyboard */,
@@ -960,6 +963,7 @@
 				584605542023CF8B004F409E /* SceneChangeRoomState.swift in Sources */,
 				589D4226209B4D4B00BDFB27 /* PrizeEntity.swift in Sources */,
 				58F52120208A2822004EA2FA /* LifeEntity.swift in Sources */,
+				9616FB162F2C1412007CF055 /* SceneDelegate.swift in Sources */,
 				58CB2CBD1FBB915D0052D3F9 /* AppDelegate.swift in Sources */,
 				584783C0202911B30064E86C /* LazerEntity.swift in Sources */,
 				583CA837208E97760042270B /* ExplodeComponent.swift in Sources */,
@@ -1038,17 +1042,21 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = Berks3/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Berks 3";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.berks;
@@ -1070,17 +1078,21 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = Berks3/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Berks 3";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.berks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1318,6 +1330,7 @@
 				CODE_SIGN_ENTITLEMENTS = Berks/Berks.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MQ4Z7LHEUG;
 				INFOPLIST_FILE = Berks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Berks 3";
@@ -1327,6 +1340,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.berks;
 				PRODUCT_NAME = Berks;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1346,6 +1360,7 @@
 				CODE_SIGN_ENTITLEMENTS = Berks/Berks.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MQ4Z7LHEUG;
 				INFOPLIST_FILE = Berks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Berks 3";
@@ -1355,6 +1370,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.designspin.berks;
 				PRODUCT_NAME = Berks;
 				PROVISIONING_PROFILE_SPECIFIER = "";
